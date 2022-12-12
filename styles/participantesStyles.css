@@ -1,0 +1,46 @@
+.tabla{
+    /* display: flex;
+    flex-direction: column; */
+    width: 100%;
+
+}
+.cabeceras{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0px 10px 0 20px;
+    padding: 0;
+    max-width: 1200px;
+}
+
+.cabecera{
+    font-weight: 400;
+    color:#948C8C;
+}
+
+
+.fila-datos{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0px 10px 0 20px;
+    padding: 0;
+    max-width: 1200px;
+    
+}
+.ancho{
+    width: 25%;
+    margin:0 20px 0 0;
+    padding: 0;
+}
+.ancho-peque{
+    width:12%;
+}
+.dato-btn{
+    width:12%
+}
+.dato-text{
+    font-size: 0.9em;
+}

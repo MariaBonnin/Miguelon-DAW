@@ -1,0 +1,208 @@
+/* CSS GENERAL */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* font-family: 'Inter', sans-serif; */
+
+}
+
+#cuerpo {
+    flex: 1;
+}
+
+/* ESTILOS HR */
+
+.hr-principal {
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+
+    color: #800080;
+}
+
+.hr-secundario {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: #B38CB4;
+    border-top: 1px;
+
+}
+
+.margen-hr {
+    margin: 10px 0 10px 0;
+}
+
+.margen-sup-hr {
+    margin-top: 10px;
+}
+
+.margen-inf-hr {
+    margin-bottom: 10px;
+}
+
+/* ESTILOS LETRAS */
+
+.titulo-princip {
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+.margen-titulo {
+    margin-left: 30px;
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+.margen-sup-titulo {
+    margin-top: 30px;
+}
+
+.margen-inf-titulo {
+    margin-bottom: 5px;
+}
+.margen-izq-titulo{
+    margin-left:30px;
+}
+
+.titulo-secundario {
+    font-size: 1.2em;
+    color: #800080;
+    font-weight: 400;
+}
+
+.titulo-tercero{
+    font-size: 1em;
+    color: #800080;
+    font-weight: 300;
+}
+.margen-titulo-tercero{
+    margin-left: 40px;
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+/* ESTILOS BOTONES */
+
+.btn {
+    /* font-weight: bold; */
+    padding: 5px 10px 5px 10px;
+    font-size: 1.1em;
+    color: #fafafa;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    min-width: 120px;
+    /* letter-spacing: 0.5px; */
+}
+
+.btn-peque {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 10px;
+    font-size: 1.1em;
+    color: #fafafa;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 50px;
+    
+}
+.btn-margenes{
+    margin: 20px 10px 20px 30px;
+
+}
+
+.btn-margen-der {
+    margin-right: 10px;
+}
+.btn-margen-izq{
+    margin-left: 20px;
+}
+
+.btn-margen-sup{
+    margin-top: 20px;
+}
+
+.btn-morado-claro {
+    background-color: #B38CB4;
+}
+
+.btn-morado {
+    background-color: #800080;
+}
+
+.btn-naranja {
+    background-color: #F89726;
+}
+
+/* HEADER */
+header {
+    background-color: #800080;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo2-contenedor {
+    padding-top: 10px;
+    margin-left: 10px;
+    height: 70px;
+}
+
+.logo2-img {
+    width: 90px;
+    height: auto;
+}
+
+.contenedor-usuario {
+    margin-right: 40px;
+
+}
+
+.contenedor-usuario>a {
+    color: #fafafa;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+}
+
+/* FOOTER */
+
+footer {
+
+    background-color: #800080;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+}
+
+.footer-link {
+    color: #fafafa;
+    text-decoration: none;
+}
+
+.footer-contenedor {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    max-width: 900px;
+    width: 100%;
+}
+
+/* CURSOR */
+.cursor-mano {
+    cursor: pointer;
+}

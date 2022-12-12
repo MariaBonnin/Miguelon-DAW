@@ -1,0 +1,131 @@
+/* CSS REGISTRO */
+
+
+.reg-login-contenedor-princip{
+    /* margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto; */
+    margin:auto;
+    width: 70%;
+    background-color: #fafafa;
+    max-width: 600px;
+}
+
+.logo-contenedor{
+    margin-top: 20px;
+    padding-top: 20px;
+    max-width: 500px;
+    max-height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.logo-img{
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: 50%;
+}
+
+.reg-login-contenedor{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-contenedor{
+    padding-left: 9%;
+    padding-right: 9%;
+    padding-top: 10px;
+}
+
+.error-contenedor{
+    padding-left: 9%;
+    padding-right: 9%;
+    
+}
+
+.reg-input {
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 2px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.reg-input:focus{
+    outline: none;
+    /* border-color: #800080; */
+    box-shadow: 0 0 5px #800080;
+}
+
+.input-error{
+    box-shadow: 0 0 5px #f20000;
+}
+
+.reg-label{
+    font-weight: bold;
+}
+
+.btn-principal-form{
+    width: 100%;
+    font-weight: bold;
+    font-size: 1em;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 7px;
+    padding-bottom: 10px;
+    background-color: #800080;
+    color: #fafafa;
+    border: none;
+    border-radius: 3px;
+    cursor:pointer;
+    letter-spacing: 0.5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.btn-principal-form:disabled{
+    background-color: #B38CB4;
+    cursor: auto;
+}
+
+.text-error{
+    font-size: 0.9em;
+    color:#f20000;
+    margin: 10px 0 0 0;
+}
+
+/* LOGIN */
+
+.login-input {
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 2px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-input:focus{
+    outline: none;
+    /* border-color: #800080; */
+    box-shadow: 0 0 5px #800080;
+}
+
+.login-texto{
+    margin-top: 7px;
+    margin-bottom: 12px;
+}
+
+.login-link{
+    text-decoration: none;
+    color:#800080;
+}
+
+

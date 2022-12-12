@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>registro</title>
+
+    <!-- COPIAR EN TODOS LOS DOCUMENTOS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style> @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap'); </style>
+
+    <link rel="stylesheet" href="./styles/comunesStyles.css">
+    <link rel="stylesheet" href="./styles/registroLoginStyles.css">
+
+    <script src="registroScript.js"></script>
+
+
+</head>
+
+<body>
+    <div id="generalReg" class="reg-login-contenedor-princip">
+        <div id="logo-contenedor" class="logo-contenedor">
+            <img src="./images/logo.png" alt="logo" id="logoImg" class="logo-img">
+        </div>
+        
+
+        <form action="login.php" method="POST" name="reg-form">
+            <div id="formBox" class="reg-login-contenedor">
+                <div class="input-contenedor">
+                    <label class="reg-label">Nombre y apellidos </label>
+                    <input name="nomAp" type="text" class="reg-input" id="nombre" required>
+                </div>
+                <div class="input-contenedor">
+                    <label class="reg-label">E-mail</label>
+                    <input name="mail" type="text" class="reg-input" id="email" required>
+                </div>
+                <div class="input-contenedor">
+                    <label class="reg-label">Contraseña</label>
+                    <input type="password" name="cont" class="reg-input" id="contrasena" minlength="8" required>
+                </div>
+                <div class="input-contenedor">
+                    <label class="reg-label">Confirmar Contraseña</label>
+                    <input type="password" name="confirmPas" class="reg-input" id="confContras" minlength="8" required>
+                </div>
+                <div class="input-contenedor">
+                    <label class="reg-label">Empresa/Entidad</label>
+                    <input name="org" type="text" class="reg-input" id="org" required>
+                </div>
+                <div class="input-contenedor">
+                    <label class="reg-label">Código</label>
+                    <input name="cod" type="text" class="reg-input" id="codigo" required>
+                </div>
+                
+
+                <div class="error-contenedor" id="nombre-error" hidden>
+                    <p class="text-error">Por favor rellena el campo "Nombre y apellidos"</p>
+                </div>
+                <div class="error-contenedor" id="email-error" hidden>
+                    <p class="text-error">El email no es una dirección válida</p>
+                </div>
+                <div class="error-contenedor" id="contrasena-error" hidden>
+                    <p class="text-error">La contraseña y la confirmación no coinciden</p>
+                </div>
+                <div class="error-contenedor" id="codigo-error" hidden>
+                    <p class="text-error"> Por favor rellena el campo "Código"</p>
+                </div>
+                <div class="input-contenedor">
+                    <input type="submit" name="registrarse" value="Registrarme" class="btn-principal-form" id="button-submit">
+                </div>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>
