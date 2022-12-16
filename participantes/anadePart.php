@@ -1,5 +1,11 @@
 <?php
 session_start();
+if (empty($_SESSION['mail'])) {
+    # Lo redireccionamos al formulario de inicio de sesión
+    header("Location: ../login.php");
+    # Y salimos del script
+    exit();
+}
  global $conn;
  $conn= new PDO("mysql:host=localhost; dbname=miguelon", "root" , "");
  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -45,11 +51,11 @@ $resu->execute();
      $busque= $result->rowCount();
      
      if($busque !=0){
-        $mensaxe='OK'; 
-        echo json_encode($mensaxe);
+        $mens='OK'; 
+        echo json_encode($mens);
      }else{
-        $mensaxe='ERROR'; 
-        echo json_encode($mensaxe);
+        $mens='ERROR'; 
+        echo json_encode($mens);
      }
 
    

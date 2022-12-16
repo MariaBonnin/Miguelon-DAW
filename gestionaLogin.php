@@ -1,16 +1,8 @@
 
 <?php
 session_start();
-// print_r(session_status());
-//     if (session_status() == PHP_SESSION_ACTIVE) {
-        // if(isset($_POST['mail'])){
-        //     $_SESSION['mail']=$_POST['mail'];}
-//    }else{
-//        // $_SESSION["mail"];
-//        print_r('entra');
-//     conectamos(); 
-    
-//    }
+
+
   
     try{
         

@@ -1,8 +1,11 @@
 <?php
 session_start();
-if (session_status() === PHP_SESSION_NONE) {
-    header("Location:login.php");
-  }
+if (empty($_SESSION['mail'])) {
+    # Lo redireccionamos al formulario de inicio de sesión
+    header("Location: ../login.php");
+    # Y salimos del script
+    exit();
+}
   global $conn;
   $contador=0;
   $conn= new PDO("mysql:host=localhost; dbname=miguelon", "root" , "");
@@ -72,7 +75,7 @@ if (session_status() === PHP_SESSION_NONE) {
             $rolRes;
          while($busqueda= $resultado->fetch(PDO::FETCH_ASSOC)){
             if($busqueda['rol']=='usu'){
-                echo '<div><input type="hidden" value="'.$busqueda['ID_Yaci'].'">'.
+                print_r( '<div><input type="hidden" value="'.$busqueda['ID_Yaci'].'">'.
                 '<div class="fila-datos">'.
                 '<div class="dato ancho">'.
                     '<p class="dato-text">'. $busqueda['nombre_ap'] .'</p>'.
@@ -92,7 +95,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 '</div>'.
             '</div>'.
             '<hr class="hr-secundario margen-sup-hr">'.
-            '</div>';
+            '</div>');
                
                
                
@@ -115,7 +118,7 @@ if (session_status() === PHP_SESSION_NONE) {
         }
         ?>
         
-        <button onclick="window.location='../menu.php'" class="btn btn-morado-claro btn-margen-der btn-margen-sup ">Volver a menú</button>
+        <button onclick="window.location='../menu.php'" class="btn btn-naranja btn-margen-der btn-margen-sup ">Volver a menú</button>
         
     </div></div>
     <footer>

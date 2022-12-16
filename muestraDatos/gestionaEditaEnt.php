@@ -11,17 +11,7 @@ global $conn;
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 //Falta try catch
 //consigue id yacimiento
-    $quer= "SELECT ID from yacimient where nombre= :nombreYac";
-    $resu = $conn->prepare($quer);
-    $nombre= htmlentities(addslashes($_POST['nombreYacimiento']));
-    $resu->bindValue(":nombreYac", $nombre); 
-    $resu->execute();
-     $idYac;
-     while($busqueda= $resu->fetch(PDO::FETCH_ASSOC)){
-          $_SESSION['usuProv']=$busqueda['ID'];
-        }
-       $idYac=$_SESSION['usuProv'];
-
+       
 //consigue id participante 
     $query= "SELECT ID from participant where contacto= :contacto";
     $res = $conn->prepare($query);
@@ -29,18 +19,20 @@ global $conn;
     $res->bindValue(":contacto", $nombre); 
     $res->execute();
     $idPart;
+    $idYac=$_SESSION['idY'];
     while($busqueda= $res->fetch(PDO::FETCH_ASSOC)){
         $idPart=$busqueda['ID'];
         }
         print_r($idPart);
     
 //introduce enterramiento
-$sql= "INSERT INTO  enterramiento (`ID`,`alias` , `ID_Yac` ,`ID_Part` , 
-`posicion`,`orientacion`,`tamanoEnterramientoAncho`,`tamanoEnterramientoLargo`,
-`tamanoIndividuo`,`edadAprox`,`sexoEstimado`,`tipoDescomposicion`,`causaMuerte`,
-`tipoEnterramiento`,`restosIndirectos`, `Comentarios`,`ultModificacion`,`excavadores` )
-     VALUES (null, :alias, :idYaci, :idParti, :posicion, :orientacion, :tEAncho, :tELargo, :tInd, :edad,
-      :sexo,:tipoDesc, :causaMuerte, :tipoEnt, :restosInd, :comentarios, NOW(), :excavadores)";
+$usuAc=$_SESSION['mail'];
+
+$sql= "UPDATE enterramiento SET `alias`=:alias , `posicion`=:posicion ,`orientacion`=:orientacion ,
+`tamanoEnterramientoAncho`=:tEAncho,`tamanoEnterramientoLargo`=:tELargo,
+`tamanoIndividuo`=:tInd ,`edadAprox`=:edad,`sexoEstimado`= :sexo,`tipoDescomposicion`= :tipoDesc ,
+`causaMuerte`= :causaMuerte,`tipoEnterramiento`= :tipoEnt,`restosIndirectos`=:restosInd ,
+ `Comentarios`=:comentarios,`ultModificacion`=NOW(),`excavadores` =:excavadores where `ID`=:id";
     
      $result = $conn->prepare($sql);
      if(isset($_POST['nombreE'])) 
@@ -113,12 +105,10 @@ $sql= "INSERT INTO  enterramiento (`ID`,`alias` , `ID_Yac` ,`ID_Part` ,
              }else{
              $restosInd="-";
              }
-        $usuAc=$_SESSION['mail'];
-        
+    $usuAc=$_SESSION['mail'];
+     $result->bindValue(":id", $_SESSION['idEnt']);   
      $result->bindValue(":alias", $alias); 
-     $result->bindValue(":idYaci", $idYac); 
-     $result->bindValue(":idParti", $idPart); 
-     $result->bindValue(":posicion", $posicion);
+    $result->bindValue(":posicion", $posicion);
      $result->bindValue(":orientacion", $orientacion);
      $result->bindValue(":tEAncho", $tamanoEA);
      $result->bindValue(":tELargo", $tamanoEL);
@@ -132,30 +122,26 @@ $sql= "INSERT INTO  enterramiento (`ID`,`alias` , `ID_Yac` ,`ID_Part` ,
      $result->bindValue(":comentarios", $comentarios);
      $result->bindValue(":excavadores", $usuAc);
     
-     if ($result->execute()) {
-        $lastInsertId = $conn->lastInsertId();
-    }
-     print_r($lastInsertId);
+    $result->execute();
      
     
 
     
     //Esqueleto
-    $s= "INSERT INTO  esqueleto (`ID`,`ID_Ent` , `craneo` ,`vCervicales` , 
-    `mandibula`,`vToracicas`,`claviculaDrcha`,`claviculaIzqda`,
-    `manubrio`,`escapulaIzqda`,`escapulaDrcha`,`esternon`,`costillas`,
-    `humeroDrcha`,`humeroIzqda`, `vLumbares`,`cubitoDrcha`,`cubitoIzqda`,
-    `radioDrcha`,`radioIzqda`, `pelvis`,`sacro`,`coccix`,
-    `falangesDrchaManos`,`falangesIzqdaManos`, `atlas`,`femurDrcha`,`femurIzqda`,
-    `rotulaDrcha`,`rotulaIzqda`, `tibiaDrcha`,`tibiaIzqda`,`peroneDrcha`,
-    `peroneIzqda`,`falangesDrchaPies`, `falangesIzqdaPies`,`indeterminado`)
-         VALUES (null, :idEnt, :craneo, :vCerv, :mandibula, :vTor, :claviculaD, :claviculaI, :manubrio, :escapulaI,
-          :escapulaD,:esternon, :costillas, :humeroD, :humeroI, :vLumb,:cubitoD, :cubitoI,
-          :radioD,:radioI, :pelvis, :sacro, :coccix, :FDM,:FIM, :atlas,
-          :femurD,:femurI, :rotulaD, :rotulaI, :tibiaD, :tibiaI,:peroneD, :peroneI,
-          :FDP,:FIP, :indeterminado)";
+    $s= "UPDATE  esqueleto SET `craneo`=:craneo ,`vCervicales`=:vCerv , 
+    `mandibula`=:mandibula,`vToracicas`= :vTor,`claviculaDrcha`=:claviculaD,`claviculaIzqda`=:claviculaI,
+    `manubrio`=:manubrio,`escapulaIzqda`=:escapulaI,`escapulaDrcha`=:escapulaD ,`esternon`=:esternon,
+    `costillas`=:costillas,`humeroDrcha`=:humeroD,`humeroIzqda`=:humeroI, `vLumbares`=:vLumb,
+    `cubitoDrcha`=:cubitoD,`cubitoIzqda`=:cubitoI,
+    `radioDrcha`=:radioD,`radioIzqda`=:radioI, `pelvis`=:pelvis,`sacro`=:sacro,`coccix`=:coccix,
+    `falangesDrchaManos`=:FDM,`falangesIzqdaManos`=:FIM, `atlas`=:atlas,`femurDrcha`=:femurD,
+    `femurIzqda`=:femurI,`rotulaDrcha`=:rotulaD,`rotulaIzqda`=:rotulaI, `tibiaDrcha`=:tibiaD ,
+    `tibiaIzqda`=:tibiaI,`peroneDrcha`=:peroneD,
+    `peroneIzqda`=:peroneI,`falangesDrchaPies`=:FDP, `falangesIzqdaPies`=:FIP,`indeterminado`=:indeterminado 
+     WHERE `ID_Ent`= :idEnt";
 
 $resul = $conn->prepare($s);
+
    if(isset($_POST['craneo'])) 
     {  $craneo=1;
     }else{
@@ -331,9 +317,8 @@ $resul = $conn->prepare($s);
     }else{
         $indeterminado=0;
     }
-    
-    
-    $resul->bindValue(":idEnt", $lastInsertId); 
+
+    $resul->bindValue(":idEnt", $_SESSION['idEnt']); 
     $resul->bindValue(":craneo", $craneo); 
     $resul->bindValue(":vCerv", $vCerv); 
     $resul->bindValue(":mandibula", $mandibula);
@@ -371,13 +356,16 @@ $resul = $conn->prepare($s);
     $resul->bindValue(":indeterminado", $indeterminado);
     $resul->execute();
     $busque=$resul->rowCount();
+   
     if($busque !=0){
             $mens=urlencode('OK'); 
-            header("Location:formAnadeEnt.php?Message=".$mens);
-            die;
+            print_r($mens);
+            header("Location:editaEnt.php?Message=".$mens);
+            //die;
          }else{
             $mens=urlencode('ERROR'); 
-            header("Location:formAnadeEnt.php?Message=".$mens);
-            die;
+            print_r($mens);
+           header("Location:editaEnt.php?Message=".$mens);
+           // die;
          }
-         ?>
+        ?>

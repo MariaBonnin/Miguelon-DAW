@@ -17,7 +17,7 @@
 .input-general{
     margin-top: 3px;
     box-sizing: border-box;
-    border: 1px solid #ccc;
+    border: 1px solid #948c8c;
     border-radius: 4px;
     padding-top: 4px;
     padding-bottom: 4px;
@@ -31,6 +31,7 @@ select{
 .input-general:focus{
     outline: none;
     box-shadow: 0 0 5px #800080;
+    border: 1px solid #000;
 }
 
 .cont-doble{
@@ -69,7 +70,7 @@ select{
 .input-hueso[type=number]{
     width:90px;
     box-sizing: border-box;
-    border: 1px solid #ccc;
+    border: 1px solid #948c8c;
     border-radius: 4px;
     padding-top: 4px;
     padding-bottom: 4px;
@@ -79,6 +80,7 @@ select{
 .input-hueso:focus{
     outline: none;
     box-shadow: 0 0 5px #800080;
+    border: 1px solid #000;
 }
 
 .contenedor-comentarios{
@@ -94,7 +96,7 @@ select{
     margin-top: 5px;
     padding: 3px 3px 2px 5px;
     box-sizing: border-box;
-    border: 1px solid #ccc;
+    border: 1px solid #948c8c;
     border-radius: 4px;
 }
 
@@ -102,10 +104,39 @@ select{
 
 }
 
-/* input[type=checkbox]{
-    visibility: hidden;
+input[type=checkbox]{
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+    font: inherit;
+    color: #948c8c;
+    width: 1.15em;
+    height: 1.15em;
+    border: 1px solid #948c8c;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
 }
+input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+    transform-origin: bottom left;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  }
 
-input[type=checkbox]:checked{
+  input[type="checkbox"]:checked::before {
     background-color: #800080;
-} */
+    transform: scale(1);
+  }
+
+  /* input[type="checkbox"]:focus {
+    outline: max(1px, 0.15em) solid #800080;
+    outline-offset: max(1px, 0.15em);
+  } */
+
+  /* https://moderncss.dev/pure-css-custom-checkbox-style/ */

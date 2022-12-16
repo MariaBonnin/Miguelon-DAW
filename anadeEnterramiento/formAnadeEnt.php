@@ -32,12 +32,46 @@ if (empty($_SESSION['mail'])) {
 </head>
 
 <body>
-    <!-- <?php
+    <?php
 
     global $conn;
     $conn = new PDO("mysql:host=localhost; dbname=miguelon", "root", "");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    ?> -->
+    if(isset($_GET['Message'])){
+        if($_GET['Message']=='OK'){
+            
+            echo '<script>Swal.fire({
+                title:"Nuevo enterramiento añadido",
+                icon:"success",
+                button:"OK",
+                }).then((result) => {
+                    Swal.fire({
+                        title:"¿Quiere añadir otro enterramiento?",
+                        icon:"warning",
+                        button:"OK",
+                        showCancelButton: true,
+                        cancelButtonText: "Cancelar",
+                        }).then((result) => {
+                            if(result.isConfirmed!=true){
+                                window.location="../menu.php";
+                            }else{header("LOCATION: http://localhost:8080/miguelon/anadeEnterramiento/formAnadeEnt.php");}
+                        })
+
+                    
+                })</script>';
+}else{
+    echo "<script>Swal.fire({
+            title:'Ha ocurrido un error y no se ha podido eliminar el usuario.',
+            text:'Reinténtelo, y si el problema persiste, contacte con los administradores',
+            icon: 'error'
+            })
+
+    }})";
+    
+}
+        }
+    
+    ?> 
 
 
     <header>
@@ -51,7 +85,7 @@ if (empty($_SESSION['mail'])) {
     </header>
 
     <div id="enterramiento">
-        <h2 class="titulo-princip margen-titulo">Nuevo Yacimiento</h2>
+        <h2 class="titulo-princip margen-titulo">Nuevo Enterramiento</h2>
         <hr class="hr-principal">
         <form action="gestionaAnadeEnt.php" id="cuadrInt" method="POST">
             <h3 class="titulo-secundario margen-titulo">Datos generales</h3>
@@ -65,6 +99,7 @@ if (empty($_SESSION['mail'])) {
                 <div class="contenedor-dato-gen contenedor-select">
                     <label class="texto-input-general">Posición</label>
                     <select class="input-general" name="posicion" id="posicion">
+                    <option value=""></option>
                         <option value="dSupino">Decúbito supino</option>
                         <option value="dProno">Decúbito prono</option>
                         <option value="dLatD">Decúbito lateral derecho</option>
@@ -74,6 +109,7 @@ if (empty($_SESSION['mail'])) {
                 <div class="contenedor-dato-gen contenedor-select">
                     <label class="texto-input-general">Orientación</label>
                     <select class="input-general" name="orientacion" id="orientacion">
+                    <option value=""></option>
                         <option value="norte">Norte</option>
                         <option value="sur">Sur</option>
                         <option value="este">Este</option>
@@ -81,8 +117,12 @@ if (empty($_SESSION['mail'])) {
                     </select>
                 </div>
                 <div class="contenedor-dato-gen">
-                    <label class="texto-input-general">Tamaño Enterramiento</label>
-                    <input class="input-general" type='number' step="any" name='tamanoEnt'>
+                    <label class="texto-input-general">Tamaño Enterramiento Largo</label>
+                    <input class="input-general" type='number' step="any" name='tamanoEntLargo'>
+                </div>
+                <div class="contenedor-dato-gen">
+                    <label class="texto-input-general">Tamaño Enterramiento Ancho</label>
+                    <input class="input-general" type='number' step="any" name='tamanoEntAncho'>
                 </div>
                 <div class="contenedor-dato-gen">
                     <label class="texto-input-general">Tamaño Individuo</label>
@@ -91,6 +131,7 @@ if (empty($_SESSION['mail'])) {
                 <div class="contenedor-dato-gen">
                     <label class="texto-input-general">Edad aproximada</label>
                     <select class="input-general" name='edad' id="edad">
+                        <option value=""></option>
                         <option value="infantil">Infantil</option>
                         <option value="joven">Joven</option>
                         <option value="adulto">Adulto</option>
@@ -99,25 +140,27 @@ if (empty($_SESSION['mail'])) {
                 <div class="contenedor-dato-gen contenedor-select">
                     <label class="texto-input-general">Sexo estimado</label>
                     <select class="input-general" name="sexo" id="sexo">
+                        <option value=""></option>
                         <option value="fem">Femenino</option>
                         <option value="masc">Masculino</option>
-                        <option value="des">Desconocido</option>
                     </select>
                 </div>
                 <div class="contenedor-dato-gen contenedor-select">
                     <label class="texto-input-general">Tipo de descomposición</label>
                     <select class="input-general" name="tipoDesc" id="tipoDesc">
-                        <option value="vacio">Vacío</option>
+                    <option value=""></option>    
+                    <option value="vacio">Vacío</option>
                         <option value="colmatado">Colmatado</option>
                     </select>
                 </div>
                 <div class="contenedor-dato-gen">
                     <label class="texto-input-general">Causa de la muerte a priori</label>
-                    <input class="input-general" type='textarea' id='nombreE' name='nombreE'>
+                    <input class="input-general" type='textarea' id='causaMuerte' name='causaMuerte'>
                 </div>
                 <div class="contenedor-dato-gen contenedor-select">
                     <label class="texto-input-general">Tipo de enterramiento</label>
                     <select class="input-general" name="tipoEnt" id="tipoEnt">
+                    <option value=""></option>
                         <option value="primario">Primario</option>
                         <option value="secundario">Secundario</option>
                     </select>
@@ -323,21 +366,27 @@ if (empty($_SESSION['mail'])) {
                     </div>
                     <div class="contenedor-comentarios">
                         <label class="texto-input-hueso" for="comentarios">Comentarios</label>
-                        <textarea class="input-hueso" id="comentarios" rows="4"></textarea>
+                        <textarea class="input-hueso" id="comentarios" name="comentarios" rows="4"></textarea>
                     </div>
                 </div>
             </div>
             <div id="nombreYaci">
-            <input type="hidden" name="nombreYacimiento" value=<?php $_GET['nombreY']?> >
+            <input type="hidden" id='nombreYacimiento' name="nombreYacimiento">
             </div>
             <input class="btn btn-morado btn-margenes" name='enviaE' type='submit' id='enviaE' value='Enviar' >
             <input class="btn btn-morado-claro" name='cancelE' type='button' id='cancelE' onclick="window.location='../menu.php'"
                 value='Volver a menú'>
         </form>
+        
 
 
     </div>
-
+    <script>
+        const queryString = window.location.search;
+        let urlParams = new URLSearchParams(queryString);
+       let a = urlParams.get('nombreY')
+        document.getElementById('nombreYacimiento').setAttribute('value',a)
+    </script>
     <footer>
         <div class="footer-contenedor">
             <div><a href="#" class="footer-link">Política de privacidad</a></div>

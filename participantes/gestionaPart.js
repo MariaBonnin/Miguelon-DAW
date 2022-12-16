@@ -71,7 +71,7 @@ function eliminaPart(e){
                             Swal.fire({
                                 title:'Ha ocurrido un error y no se ha podido eliminar el usuario.',
                                 text:'Reinténtelo, y si el problema persiste, contacte con los administradores',
-                                icon: "warning"
+                                icon: "error"
                                 })
 
                         }})

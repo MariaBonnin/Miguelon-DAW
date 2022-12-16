@@ -86,7 +86,8 @@
             '</div>'.
             '<div class="btn-yacim">'.
             '<input type="hidden" name="nombreYac" value="'.$val['nombre'].'">'.
-                '<button name="datos" class="btn btn-morado" onclick="" >Datos</button>'.
+            '<input type="hidden" name="estado" value="activo">'.
+                '<button name="datos" class="btn btn-morado" onclick="abreDatos(this)" >Datos</button>'.
                 '<button name="participantes" class="btn btn-morado" onclick="abrePart(this)">Participantes</button>'.
                 '<button name="anadeEnt" class="btn btn-naranja" onclick="nuevoEnt(this)">Añadir enterramiento</button>'.
             '</div>'.
@@ -122,18 +123,12 @@
                 '</div>'.
                 '<div class="btn-yacim">'.
                     '<input type="hidden" name="nombreYac" value="'.$val['nombre'].'">'.
-                    '<button name="datos" class="btn btn-morado">Datos</button>'.
-                    '<button name="participantes" class="btn btn-morado">Participantes</button>'.
+                    '<input type="hidden" name="estado" value="finalizado">'.
+                    '<button name="datos" class="btn btn-morado" onclick="abreDatos(this)" >Datos</button>'.
+                    '<button name="participantes" class="btn btn-morado" onclick="abrePart(this)">Participantes</button>'.
                 '</div>'.
             '</div>'.
             '<hr class="hr-secundario margen-hr">';   
-
-
-        // echo '<div name="registrosFin">
-        // <p name="nombreYac">'.$val['nombre'].'</p>'.
-        // '<input type="hidden" name="nombreYac" value="'.$val['nombre'].'">'.
-        // '<button name="datos">Datos</button>'.
-        // '<button name="participantes">Participantes</button>';
      }
     ?>
         </div>
@@ -144,11 +139,19 @@
     }
     function abrePart(e){
         let nomYac=$($($(e).parent()).children()[0]).val();
-        location.href = "./participantes/participantesUsu.php?nombreY="+nomYac;
+        let estad=$($($(e).parent()).children()[1]).val();
+        location.href = "./participantes/participantesUsu.php?nombreY="+nomYac +"&estado="+estad;
     }
     function nuevoEnt(e){
         let nomYac=$($($(e).parent()).children()[0]).val();
-        location.href = "./anadeEnterramiento/formAnadeEnt.php?nombreY="+nomYac;
+        let estad=$($($(e).parent()).children()[1]).val();
+        location.href = "./anadeEnterramiento/formAnadeEnt.php?nombreY="+nomYac+"&estado="+estad;
+    }
+    function abreDatos(e){
+        let nomYac=$($($(e).parent()).children()[0]).val();
+        let estad=$($($(e).parent()).children()[1]).val();
+        console.log(estad)
+        location.href = "./muestraDatos/datosPr.php?nombreY="+nomYac+"&estado="+estad;
     }
 
     

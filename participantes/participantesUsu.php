@@ -1,8 +1,11 @@
 <?php
 session_start();
-if (session_status() === PHP_SESSION_NONE) {
-    header("Location:login.php");
-  }
+if (empty($_SESSION['mail'])) {
+    # Lo redireccionamos al formulario de inicio de sesión
+    header("Location: ../login.php");
+    # Y salimos del script
+    exit();
+}
   global $conn;
   $contador=0;
   $conn= new PDO("mysql:host=localhost; dbname=miguelon", "root" , "");
@@ -45,7 +48,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <!-- yacipart.ID_Yaci=:idYaci -->
     <div id="cuerpo">
         <div>
-            <h2 class="titulo-princip margen-titulo">Participantesen <?php print_r($_GET['nombreY'])?></h2>
+            <h2 class="titulo-princip margen-titulo">Participantes en <?php print_r($_GET['nombreY'])?></h2>
         </div>
         <hr class="hr-principal margen-inf-hr">
         <div class="tabla">
@@ -74,12 +77,14 @@ if (session_status() === PHP_SESSION_NONE) {
                     $rolRes=$busqueda['rol'];
                 }
             }
-            echo $_SESSION['mail'];
+            //echo $_SESSION['mail'];
             if(strcmp($rolRes,'admin')===0){
                 header('Location:participantesAdmin.php?nombreY='.$_GET['nombreY']);
             }else{
-            while($busqueda= $resultado->fetch(PDO::FETCH_ASSOC)){
-
+            $resultad = $conn->prepare($sql);
+            $resultad->bindValue(":nombreYaci", $_GET['nombreY']);
+            $resultad->execute();
+            while($busqueda= $resultad->fetch(PDO::FETCH_ASSOC)){
                 print_r('<div class="fila-datos">'.
                 '<div class="dato ancho">'.
                     '<p class="dato-text">'. $busqueda['nombre_ap'] .'</p>'.
@@ -114,7 +119,7 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
         <div>
             <button class="btn btn-morado btn-margen-izq btn-margen-der btn-margen-sup ">Abandonar Yacimiento</button>
-            <button onclick="window.location='../menu.php'" class="btn btn-morado-claro btn-margen-der btn-margen-sup ">Volver a menú</button>
+            <button onclick="window.location='../menu.php'" class="btn btn-naranja btn-margen-der btn-margen-sup ">Volver a menú</button>
         </div>
     </div>
     </div>
